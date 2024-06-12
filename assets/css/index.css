@@ -11,16 +11,23 @@
     padding: 0;
 }
 body{
-    background-image: url(./assets/images/fondo.jpg);
+    background-image: url(/assets/images/fondo-landing.jpg);
     background-size: cover;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 .isle-container{
     width: 100vw;
     height: 100vh;
 }
 a{
+    width: 20vw;
+    height: 10vh;
     text-decoration: none;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 table{
     max-width: 100%;
@@ -38,30 +45,23 @@ table{
     width: 10vw;
 }
 
-
-
-table{
+.container-main{
+    display: flex;
+    justify-content: center;
+    margin: 6rem 0 0 0;
+}
+.isle-container{
     margin: 2rem 0 0 0;
     display: flex;
     justify-content: center;
-}
-td{
-    width: 30vw;
+    align-items: center;
+    gap: 5vw;
+    width: 100%;
     height: 20vh;
 }
-tr{
-    width: 10rem;
-}
-.tr-normal{
-    width: 10vw;
-    height: 20vh;
-}
-.tr-especial{
-    max-width: 5rem;
-    width: 3rem;
-    height: 2rem;   
-}
+
 .isle{
+    font-size: 1.3rem;
     width: 20vw;
     height: 10vh;
     background-image: linear-gradient(90deg,var(--one),var(--three),var(--one));
@@ -82,9 +82,6 @@ tr{
     transform: scale(1.02);
     transition: all 0.8s ease;
 }
-.space{
-    padding: 5rem 0 5rem 0;
-}
 .logo-isle{
     width: 30vw;
     height: 20vh;
@@ -100,4 +97,18 @@ tr{
 .button-text{
     color: var(--white);
     text-decoration: none;
+}
+footer{
+    font-size: 1rem;
+    color: var(--white);
+    background-image: linear-gradient(90deg,rgba(255,255,255,0)20%,var(--three),rgba(255,255,255,0)80%);
+    height: 5vh;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+
 }

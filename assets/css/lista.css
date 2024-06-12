@@ -1,0 +1,108 @@
+:root{
+    --one: #000000;
+    --two: #150050;
+    --three: #3F0071;
+    --four: #FB2576;
+    --black: #0B1215;
+    --white: #FAF9F6;
+} 
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-image: url(/assets/images/rosa-lista.jpg);
+    background-size: cover;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--black);
+    width: 80vw;
+    height: 100vh;
+    border-radius: .5rem;
+    box-shadow: 0 0 1rem 0rem var(--white);
+    gap: 1rem;
+}
+.lista-text{
+    margin: 1rem 0 0 0;
+    font-size: 3rem;
+    color: var(--white);
+}
+.lista{
+    color: var(--white);
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}
+.row{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 .2rem 0rem 0rem var(--four);
+    border-radius: .5rem;
+}
+form{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 90%;
+}
+
+.search{
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    background-color: var(--black);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: .5rem;
+    color: var(--white);
+}
+.text{
+    color: var(--white);
+    font-size: 1.5rem;
+}
+.button{
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    background-color: var(--black);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: .5rem;
+    color: var(--white);
+    transition: box-shadow linear .2s, background-color linear .2s, color linear .2s;
+}
+.button:hover{
+    background-color: var(--four);
+    color: var(--black);
+    border: 1px solid var(--black);
+    box-shadow: 0rem 0rem 1rem 0rem var(--four);
+    cursor: pointer;
+    transition: box-shadow linear .2s, background-color ease-in .2s;
+}
+table{
+    width: 100%;
+    border-collapse: separate;
+
+}
+tr.titulos>td{
+    padding: 0 0 1rem 0;
+}
+td{
+    text-align: center;
+    padding: 1rem 0;
+}
+.botones{
+    display: flex;
+    justify-content: center;
+}
+.form{
+    display: flex;
+    justify-content: center;
+}
