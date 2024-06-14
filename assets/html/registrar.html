@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <link rel="stylesheet" href="/assets/css/registrar.css" />
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>registrar</title>
   </head>
+
   <body>
     <div class="form">
       <form action="/assets/php/register.php" method="post">
         <span class="title">REGISTRO</span>
-        <span class="nombre">Nombre: <input type="text" placeholder="nombre" id="nombre" name="nombre" /></span>
-        <span class="apellido">Apellido: <input type="text" placeholder="apellido" id="apellido" name="apellido" /></span>
-        <span class="dni">Dni: <input type="text" placeholder="dni" id="dni" name="dni" /></span>
+        <span class="nombre">Nombre: <input type="text" placeholder="nombre" id="nombre" name="nombre" required /></span>
+        <span class="apellido">Apellido: <input type="text" placeholder="apellido" id="apellido" name="apellido" required /></span>
+        <span class="dni">Dni: <input type="number" placeholder="dni" id="dni" name="dni" required min="1" /></span>
         <span class="producto"
           >Producto:
-          <select name="producto" id="producto">
+          <select name="producto" id="producto" required>
+            <option value="" selected hidden disabled>---</option>
             <option value="cocodrilo">Cocodrilo</option>
             <option value="dragon">Dragon</option>
             <option value="puplo">Pulpo</option>
@@ -25,7 +28,8 @@
         </span>
         <span class="color"
           >Color:
-          <select name="color" id="color">
+          <select name="color" id="color" required>
+            <option value="" selected hidden disabled>---</option>
             <option value="negro">Negro</option>
             <option value="gris">Gris</option>
             <option value="violeta">Violeta</option>
@@ -33,8 +37,8 @@
             <option value="custom">Custom</option>
           </select>
         </span>
-        <span class="fecha">Fecha de entrega: <input type="date" id="F-entrega" name="date" /></span>
-        <span class="precio">precio: <input type="text" id="precio" name="price" /></span>
+        <span class="fecha">Fecha de entrega: <input type="date" id="F-entrega" name="date" required /></span>
+        <span class="precio">precio: <input type="number" id="precio" name="price" min="1" required /></span>
         <div class="boton">
           <button class="atras"><a href="/landing.html">ATRAS</a></button>
           <button type="submit" class="submit-button">SUBMIT</button>

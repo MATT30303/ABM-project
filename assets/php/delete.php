@@ -1,21 +1,27 @@
 <?php
 // Include the database connection file
-include './realconection.php';
+include './conection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     $id = $_POST['id'];
 
     // Prepare and execute the delete query
-    $sql = $conn->prepare("DELETE FROM personas WHERE id = ?");
-    $sql->bind_param("i", $id);
+    $sql = $pdo->prepare("DELETE FROM personas WHERE id = :id");
+    $sql->bindParam(":id", $id,PDO::PARAM_INT);
     
     if ($sql->execute()) {
-        echo "Record deleted successfully.";
+        echo '<script type="text/javascript">
+        alert("datos eliminados correctamente");
+        window.location.href = "list.php";
+      </script>';
     } else {
-        echo "Error deleting record: " . $conn->error;
+        echo '<script type="text/javascript">
+        alert("error al eliminar los datos");
+        window.location.href = "list.php";
+      </script>';
     }
     
-    $sql->close();
+    $sql=null;
 } else {
     echo "No ID received.";
 }

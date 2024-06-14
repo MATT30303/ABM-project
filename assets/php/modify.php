@@ -1,18 +1,19 @@
 <?php
 // Include the database connection file
-include './realconection.php';
+include './conection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
-    $id = $_POST['id'];
+        $id = $_POST['id'];
+    
+        // Fetch the record to be modified
+        $sql = $pdo->prepare("SELECT * FROM personas WHERE Id = :id");
+        $sql->bindParam(":id", $id, PDO::PARAM_INT);
+        $sql->execute();
+        $user = $sql->fetch(PDO::FETCH_ASSOC);
 
-    // Fetch the record to be modified
-    $sql = $conn->prepare("SELECT * FROM personas WHERE Id = ?");
-    $sql->bind_param("i", $id);
-    $sql->execute();
-    $result = $sql->get_result();
-    $user = $result->fetch_assoc();
-    $sql->close();
+        $sql = null;
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $id = $_POST['id'];
@@ -26,24 +27,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $estado = $_POST['entrega'];
 
     // Prepare and execute the update query
-    $sql = $conn->prepare("UPDATE personas SET nombre = ?, apellido = ?, dni = ?, producto = ?, color = ?, fecha = ?, precio = ?, estado = ? WHERE Id = ?");
-    $sql->bind_param("ssssssssi", $nombre, $apellido, $dni, $producto, $color, $fecha, $precio, $estado, $id);
+    $sql = $pdo->prepare("UPDATE personas SET nombre = :nombre, apellido = :apellido, dni = :dni, producto = :producto,
+    color = :color, fecha = :fecha, precio = :precio, estado = :estado WHERE Id = :id");
+    $sql->bindParam(":id", $id, PDO::PARAM_INT);
+    $sql->bindParam(":nombre", $nombre, PDO::PARAM_STR);
+    $sql->bindParam(":apellido", $apellido, PDO::PARAM_STR);
+    $sql->bindParam(":dni", $dni, PDO::PARAM_INT);
+    $sql->bindParam(":producto", $producto, PDO::PARAM_STR);
+    $sql->bindParam(":color", $color, PDO::PARAM_STR);
+    $sql->bindParam(":fecha", $fecha, PDO::PARAM_STR);
+    $sql->bindParam(":precio", $precio, PDO::PARAM_INT);
+    $sql->bindParam(":estado", $estado, PDO::PARAM_STR);
     $sql->execute();
-    $sql->close();
+    $sql = null;
 
     // Redirect back to the main page
     header("Location: list.php");
     exit();
 }
 
-$conn->close();
+$sql = null;
 ?>
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,26 +63,26 @@ $conn->close();
     <div class="form">
         <form action="" method="post">
             <span class="title">MODIFICACION</span>
-            <input type="hidden" name="id" value="<?php echo htmlspecialchars($user['Id']); ?>">
-            <span class="nombre">Nombre: <input type="text" id="nombre" name="nombre"
+            <input type="hidden" name="id" required value="<?php echo htmlspecialchars($user['Id']); ?>">
+            <span class="nombre">Nombre: <input type="text" id="nombre" name="nombre" required
                     value="<?php echo htmlspecialchars($user['nombre']); ?>" /></span>
             <span class="apellido">Apellido: <input type="text" placeholder="apellido" id="apellido" name="apellido"
-                    value="<?php echo htmlspecialchars($user['apellido']); ?>" /></span>
-            <span class="dni">Dni: <input type="text" placeholder="dni" id="dni" name="dni"
+                    required value="<?php echo htmlspecialchars($user['apellido']); ?>" /></span>
+            <span class="dni">Dni: <input type="number" placeholder="dni" id="dni" name="dni" required
                     value="<?php echo htmlspecialchars($user['dni']); ?>" /></span>
             <span class="producto">Producto:
-                <select name="producto" id="producto">
+                <select name="producto" id="producto" required>
                     <option value="<?php echo htmlspecialchars($user['producto']); ?>" selected hidden>
                         <?php echo htmlspecialchars($user['producto']); ?></option>
                     <option value="cocodrilo">Cocodrilo</option>
                     <option value="dragon">Dragon</option>
-                    <option value="puplo">Pulpo</option>
+                    <option value="pulpo">Pulpo</option>
                     <option value="ajolote">Ajolote</option>
                     <option value="custom">Custom</option>
                 </select>
             </span>
             <span class="color">Color:
-                <select name="color" id="color">
+                <select name="color" id="color" required>
                     <option value="<?php echo htmlspecialchars($user['color']); ?>" selected hidden>
                         <?php echo htmlspecialchars($user['color']); ?></option>
                     <option value="negro">Negro</option>
@@ -88,13 +92,13 @@ $conn->close();
                     <option value="custom">Custom</option>
                 </select>
             </span>
-            <span class="fecha">Fecha de entrega: <input type="date" id="F-entrega" name="date"
+            <span class="fecha">Fecha de entrega: <input type="date" id="F-entrega" name="date" required
                     value="<?php echo htmlspecialchars($user['fecha']); ?>" /></span>
-            <span class="precio">precio: <input type="text" id="precio" name="price"
+            <span class="precio">precio: <input type="number" id="precio" name="price" required min="1"
                     value="<?php echo htmlspecialchars($user['precio']); ?>" /></span>
             <div class="entrega">
                 <span>Entregado <input type="radio" name="entrega" value="entregado" /></span>
-                <span>Pendiente <input type="radio" name="entrega" value="pendiente" /></span>
+                <span>Pendiente <input type="radio" name="entrega" value="pendiente" checked /></span>
             </div>
             <div class="boton">
                 <button class="atras"><a href="./list.php">ATRAS</a></button>

@@ -1,31 +1,30 @@
 <?php 
-include "./realconection.php";
+include "./conection.php";
 $data = [];
 $name = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST['name']);
 
-    // If name is empty, select all records
     if (empty($name)) {
         $sql = "SELECT * FROM personas";
-        $result = $conn->query($sql);
+        $result = $pdo->query($sql);
+        
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = $row;
+        }
     } else {
-        // Prepare and execute the query for a specific name
-        $sql = $conn->prepare("SELECT * FROM personas WHERE nombre LIKE ?");
+        $sql = $pdo->prepare("SELECT * FROM personas WHERE nombre LIKE :nombre");
         $likeName = "%$name%";
-        $sql->bind_param("s", $likeName);
+        $sql->bindParam(":nombre", $likeName);
         $sql->execute();
-        $result = $sql->get_result();
+        $data = array();
+        while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+            $data[] = $row;
+        }
     }
 
-    // Fetch the results
-    while ($row = $result->fetch_assoc()) {
-        $data[] = $row;
-    }
-
-    // Close the statement if it was prepared
     if (!empty($name)) {
-        $sql->close();
+        $sql = null;
     }
 }
 
