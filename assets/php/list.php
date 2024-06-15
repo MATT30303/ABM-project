@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <span class="lista-text">Pedidos</span>
         <form method="post">
             <span class="text">Busqueda: </span>
-            <input type="text" name="name" placeholder="nombre" class="search"
+            <input type="text" name="name" placeholder="Nombre" class="search"
                 value="<?php echo htmlspecialchars($name ?? ''); ?>" />
             <button type="submit" class="button">Obtener lista</button>
             <a href="/landing.html" class="button">Home</a>

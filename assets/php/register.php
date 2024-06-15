@@ -6,7 +6,7 @@ try {
     VALUES (:nombre, :apellido, :dni, :producto, :color, :fecha, :precio, :estado)";
 
     $stmt = $pdo->prepare($qrystr);
-
+    
     $nombre = $_POST["nombre"];
     $apellido = $_POST["apellido"];
     $dni = $_POST["dni"];
@@ -15,7 +15,7 @@ try {
     $date = $_POST["date"];
     $price = $_POST["price"];
     $estado = "prendiente";
-  
+
     $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
     $stmt->bindParam(':apellido', $apellido, PDO::PARAM_STR);
     $stmt->bindParam(':dni', $dni, PDO::PARAM_INT);
