@@ -1,0 +1,76 @@
+:root{
+    --one: #000000;
+    --two: #150050;
+    --three: #3F0071;
+    --four: #FB2576;
+    --black: #0B1215;
+    --white: #FAF9F6;
+    --gray: #26252C;
+} 
+*{
+    margin: 0;
+    padding: 0;
+    
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+body{
+    background-image: url(/assets/images/fondo-landing.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    width: 100%;
+}
+form{
+    width: 30vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    color: var(--white);
+    box-shadow: 0 0 1rem 0 var(--white);
+    border-radius: 1rem;
+}
+span{
+    font-size: 2rem;
+    padding: 0 .5rem;
+    border-bottom: .2rem solid var(--four);
+    border-radius: 2rem;
+}
+a{
+    text-decoration: none;
+}
+input::file-selector-button, input[type=submit], a{
+    margin: 1rem 1rem;
+    font-size: 1.5rem;
+    color: var(--white);
+    background-color: transparent;
+    outline: thin solid rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: .5rem;
+    padding: .5rem 1rem .5rem 1rem;
+    cursor:pointer;
+    transition: background-color ease-in .2s, box-shadow ease-in .2s;
+}
+input::file-selector-button:hover,input[type=submit]:hover, a:hover{
+    background-color: var(--four);
+    outline: thin solid var(--black);
+    color: var(--black);
+    box-shadow: 0rem 0rem 1rem 0rem var(--four);
+    transition: background-color ease-in .2s, box-shadow ease-in .2s;
+}
+.back-upload{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}

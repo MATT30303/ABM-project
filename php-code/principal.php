@@ -1,1 +1,0 @@
-Bienvenidos al sitio web de mi empresa

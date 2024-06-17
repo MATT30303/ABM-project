@@ -1,0 +1,65 @@
+<?php
+include './conection.php';
+try {
+    if (isset($_POST['submit'])) {
+        $file = $_FILES['file']['tmp_name'];
+
+        if (($handle = fopen($file, "r")) !== FALSE) {
+            $pdo->beginTransaction();
+            $stmt = $pdo->prepare("INSERT INTO personas (nombre, apellido, dni, producto, color, fecha, precio, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                if (count($data) == 8) {
+                    $stmt->execute($data);
+                } else {
+                    echo "Invalid row detected: " . implode(",", $data);
+                }
+            }
+
+            $pdo->commit();
+            fclose($handle);
+            echo '<script type="text/javascript">
+            confirm("datos insertados correctamente!");
+            window.location.href = "/landing.html";
+          </script>';
+        } else {
+            echo '<script type="text/javascript">
+            confirm("error al leer el archivo!");
+            window.location.href = "/landing.html";
+          </script>';
+        }
+    }
+} catch (PDOException $e) {
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
+    echo "Error: " . $e->getMessage();
+}
+
+$pdo = null;
+?>
+
+<!<!DOCTYPE html>
+    <html>
+    <link rel="stylesheet" href="/assets/css/upload.css" />
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Upload</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <form action="" method="post" enctype="multipart/form-data">
+                <span>Seleccione archivo</span>
+                <input type="file" name="file" class="file" />
+                <div class="back-upload">
+                    <a href="/landing.html">Home</a>
+                    <input type="submit" name="submit" value="Submit" />
+                </div>
+            </form>
+        </div>
+    </body>
+
+    </html>

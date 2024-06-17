@@ -1,1 +1,0 @@
-Mas información del sitio

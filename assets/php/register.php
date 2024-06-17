@@ -14,7 +14,7 @@ try {
     $color = $_POST["color"];
     $date = $_POST["date"];
     $price = $_POST["price"];
-    $estado = "prendiente";
+    $estado = "pendiente";
 
     $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
     $stmt->bindParam(':apellido', $apellido, PDO::PARAM_STR);
@@ -27,12 +27,12 @@ try {
 
     $stmt->execute();
     echo '<script type="text/javascript">
-        alert("datos insertados correctamente!");
+        confirm("datos insertados correctamente!");
         window.location.href = "/assets/html/registrar.html";
       </script>';
 } catch (PDOException $e) {
     echo "<script type='text/javascript'>
-            alert('Error: " . $e->getMessage() . "');
+            confirm('Error: " . $e->getMessage() . "');
           </script>";
         }
 ?>
