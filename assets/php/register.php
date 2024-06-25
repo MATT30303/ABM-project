@@ -28,7 +28,7 @@ try {
     $stmt->execute();
     echo '<script type="text/javascript">
         confirm("datos insertados correctamente!");
-        window.location.href = "/assets/html/registrar.html";
+        window.location.href = "/landing.html";
       </script>';
 } catch (PDOException $e) {
     echo "<script type='text/javascript'>

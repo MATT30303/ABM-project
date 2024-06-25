@@ -4,20 +4,20 @@ try {
     if (isset($_POST['submit'])) {
         $file = $_FILES['file']['tmp_name'];
 
-        if (($handle = fopen($file, "r")) !== FALSE) {
+        if (($archivo = fopen($file, "r")) !== FALSE) {
             $pdo->beginTransaction();
             $stmt = $pdo->prepare("INSERT INTO personas (nombre, apellido, dni, producto, color, fecha, precio, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 
-            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            while (($data = fgetcsv($archivo, 1000, ",")) !== FALSE) {
                 if (count($data) == 8) {
                     $stmt->execute($data);
                 } else {
-                    echo "Invalid row detected: " . implode(",", $data);
+                    echo "Error: " . implode(",", $data);
                 }
             }
 
             $pdo->commit();
-            fclose($handle);
+            fclose($archivo);
             echo '<script type="text/javascript">
             confirm("datos insertados correctamente!");
             window.location.href = "/landing.html";

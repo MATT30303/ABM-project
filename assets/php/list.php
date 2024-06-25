@@ -33,9 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <link rel="stylesheet" href="/assets/css/lista.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+
 
 <head>
     <meta charset="UTF-8" />
@@ -65,12 +67,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <td>Fecha</td>
                     <td>Precio</td>
                     <td>Estado</td>
-                    <td>Acciones</td>
+                    <td class="acciones">Acciones</td>
                 </tr>
                 <tbody>
 
                     <?php foreach ($data as $item): ?>
-                    <tr>
+                    <tr class="list-row">
                         <td><?php echo htmlspecialchars($item['nombre']); ?></td>
                         <td><?php echo htmlspecialchars($item['apellido']); ?></td>
                         <td><?php echo htmlspecialchars($item['dni']); ?></td>
@@ -82,11 +84,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <td class="botones">
                             <form method="post" action="/assets/php/modify.php" class="form">
                                 <input type="hidden" name="id" value='<?php echo $item['Id']; ?>' />
-                                <button type="submit" class="button">Modify</button>
+                                <button type="submit" class="button">Modificar</button>
                             </form>
                             <form method="post" action="/assets/php/delete.php" class="form">
                                 <input type="hidden" name="id" value='<?php echo $item['Id']; ?>' />
-                                <button type="submit" class="button">Delete</button>
+                                <button type="submit" class="button">Borrar</button>
                             </form>
                         </td>
                     </tr>

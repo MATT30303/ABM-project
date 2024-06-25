@@ -2,7 +2,7 @@
 // Include the database connection file
 include 'conection.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
+if (isset($_POST['id'])) {
     $id = $_POST['id'];
 
     // Prepare and execute the delete query
@@ -23,12 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     
     $sql=null;
 } else {
-    echo "No ID received.";
+  echo '<script type="text/javascript">
+  alert("No se recibio una ID");
+  window.location.href = "list.php";
+</script>';
 }
-
-$conn->close();
-
-// Redirect back to the main page
-header("Location: list.php");
-exit();
 ?>

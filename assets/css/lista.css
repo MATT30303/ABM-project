@@ -15,9 +15,9 @@
     font-style: normal;
 }
 body{
-    background-image: url(/assets/images/rosa-lista.jpg);
+    background-image: url(/assets/images/fondo-lista.jpg);
     background-size: cover;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-attachment: fixed;
     display: flex;
     justify-content: center;
@@ -27,7 +27,7 @@ body{
     flex-direction: column;
     align-items: center;
     background-color: var(--black);
-    width: 80vw;
+    width: 85vw;
     border-radius: .5rem;
     box-shadow: 0 0 1rem 0rem var(--white);
     gap: 1rem;
@@ -79,32 +79,40 @@ form{
     font-size: 1.5rem;
 }
 .button{
+    display: grid;
     text-decoration: none;
-    font-size: 1rem;
-    padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 18px;
+    padding: .5rem 1rem;
     background-color: var(--black);
     border: none;
-    outline: 1px solid rgba(255, 255, 255, 0.5);
+    outline: thin solid rgba(255, 255, 255, 0.5);
     border-radius: .5rem;
     color: var(--white);
     transition: background-color linear 0.2s, color linear .2s;
+    cursor: pointer;
 }
 .button:hover{
     background-color: var(--four);
     color: var(--black);
-    outline: 1px solid var(--black);
-    box-shadow: 0rem 0rem 1rem 0rem var(--four);
-    cursor: pointer;
+    outline: thin solid var(--black);
+    box-shadow: 0 0 1rem 0 var(--four);
     transition: background-color ease-in 0.2s, color linear .2s, box-shadow linear .2s;
 }
 table{
     width: 100%;
     height: 100%;
     border-collapse: separate;
-
+    border-spacing: 1rem 1rem;
 }
-tr.titulos>td{
-    padding: 0 0 1rem 0;
+.list-row{
+    border: none;
+    border-radius: .5rem;
+    box-shadow: none;
+    transition: box-shadow ease-in .2s;
+}
+.list-row:hover{
+    box-shadow: 0 .125rem 0rem 0rem var(--four);
+    transition: box-shadow ease-in .2s;
 }
 td{
     text-align: center;
@@ -117,4 +125,12 @@ td{
 .form{
     display: flex;
     justify-content: center;
+}
+.titulos td{
+    border: none;
+    border-radius: .5rem;
+    border-bottom: .125rem solid var(--four);
+}
+.titulos:hover{
+    transition: none;
 }
