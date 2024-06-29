@@ -6,10 +6,10 @@ try {
 
         if (($archivo = fopen($file, "r")) !== FALSE) {
             $pdo->beginTransaction();
-            $stmt = $pdo->prepare("INSERT INTO personas (nombre, apellido, dni, producto, color, fecha, precio, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO personas (nombre, apellido, dni, producto, color, precio, estado) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             while (($data = fgetcsv($archivo, 1000, ",")) !== FALSE) {
-                if (count($data) == 8) {
+                if (count($data) == 7) {
                     $stmt->execute($data);
                 } else {
                     echo "Error: " . implode(",", $data);

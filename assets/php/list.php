@@ -1,11 +1,12 @@
 <?php 
 include "./conection.php";
 $data = [];
-$name = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = trim($_POST['name']);
+$searchTerm = "";
 
-    if (empty($name)) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $searchTerm = trim($_POST['searchTerm']);
+
+    if (empty($searchTerm)) {
         $sql = "SELECT * FROM personas";
         $result = $pdo->query($sql);
         
@@ -13,18 +14,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $data[] = $row;
         }
     } else {
-        $sql = $pdo->prepare("SELECT * FROM personas WHERE nombre LIKE :nombre");
-        $likeName = "%$name%";
-        $sql->bindParam(":nombre", $likeName);
+        if (is_numeric($searchTerm)) {
+            $sql = $pdo->prepare("SELECT * FROM personas WHERE Id = :id");
+            $sql->bindParam(":id", $searchTerm, PDO::PARAM_INT);
+        } else {
+            $sql = $pdo->prepare("SELECT * FROM personas WHERE nombre LIKE :nombre");
+            $likeName = "%$searchTerm%";
+            $sql->bindParam(":nombre", $likeName);
+        }
+        
         $sql->execute();
-        $data = array();
         while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
             $data[] = $row;
         }
-    }
-
-    if (!empty($name)) {
-        $sql = null;
     }
 }
 
@@ -50,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <span class="lista-text">Pedidos</span>
         <form method="post">
             <span class="text">Busqueda: </span>
-            <input type="text" name="name" placeholder="Nombre" class="search"
+            <input type="text" name="searchTerm" placeholder="ID // Nombre" class="search"
                 value="<?php echo htmlspecialchars($name ?? ''); ?>" />
             <button type="submit" class="button">Obtener lista</button>
             <a href="/landing.html" class="button">Home</a>
@@ -59,12 +61,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div id="lista" class="lista">
             <table>
                 <tr class="titulos">
+                    <td>ID</td>
                     <td>Nombre</td>
                     <td>Apellido</td>
                     <td>DNI</td>
                     <td>Producto</td>
                     <td>Color</td>
-                    <td>Fecha</td>
                     <td>Precio</td>
                     <td>Estado</td>
                     <td class="acciones">Acciones</td>
@@ -73,12 +75,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <?php foreach ($data as $item): ?>
                     <tr class="list-row">
+                        <td><?php echo htmlspecialchars($item['Id'])?></td>
                         <td><?php echo htmlspecialchars($item['nombre']); ?></td>
                         <td><?php echo htmlspecialchars($item['apellido']); ?></td>
                         <td><?php echo htmlspecialchars($item['dni']); ?></td>
                         <td><?php echo htmlspecialchars($item['producto']); ?></td>
                         <td><?php echo htmlspecialchars($item['color']); ?></td>
-                        <td><?php echo htmlspecialchars($item['fecha']); ?></td>
                         <td>$<?php echo htmlspecialchars($item['precio']); ?></td>
                         <td><?php echo htmlspecialchars($item['estado']); ?></td>
                         <td class="botones">

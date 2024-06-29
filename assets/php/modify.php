@@ -22,20 +22,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $dni = $_POST['dni'];
     $producto = $_POST['producto'];
     $color = $_POST['color'];
-    $fecha = $_POST['date'];
     $precio = $_POST['price'];
     $estado = $_POST['entrega'];
 
     // Prepare and execute the update query
     $sql = $pdo->prepare("UPDATE personas SET nombre = :nombre, apellido = :apellido, dni = :dni, producto = :producto,
-    color = :color, fecha = :fecha, precio = :precio, estado = :estado WHERE Id = :id");
+    color = :color, precio = :precio, estado = :estado WHERE Id = :id");
     $sql->bindParam(":id", $id, PDO::PARAM_INT);
     $sql->bindParam(":nombre", $nombre, PDO::PARAM_STR);
     $sql->bindParam(":apellido", $apellido, PDO::PARAM_STR);
     $sql->bindParam(":dni", $dni, PDO::PARAM_INT);
     $sql->bindParam(":producto", $producto, PDO::PARAM_STR);
     $sql->bindParam(":color", $color, PDO::PARAM_STR);
-    $sql->bindParam(":fecha", $fecha, PDO::PARAM_STR);
     $sql->bindParam(":precio", $precio, PDO::PARAM_INT);
     $sql->bindParam(":estado", $estado, PDO::PARAM_STR);
     $sql->execute();
@@ -97,8 +95,6 @@ $sql = null;
                     <option value="custom">Custom</option>
                 </select>
             </span>
-            <span class="fecha">Fecha de entrega: <input type="date" id="F-entrega" name="date" required
-                    value="<?php echo htmlspecialchars($user['fecha']); ?>" /></span>
             <span class="precio">precio: <input type="number" id="precio" name="price" required min="1"
                     value="<?php echo htmlspecialchars($user['precio']); ?>" /></span>
             <div class="entrega">

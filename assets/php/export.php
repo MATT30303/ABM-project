@@ -6,7 +6,7 @@ try {
 
     $output = fopen('php://output', 'w');
 
-    $stmt = $pdo->query("SELECT nombre, apellido, dni, producto, color, fecha, precio, estado FROM personas");
+    $stmt = $pdo->query("SELECT nombre, apellido, dni, producto, color, precio, estado FROM personas");
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         fputcsv($output, $row);
