@@ -11,11 +11,9 @@ try {
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         fputcsv($output, $row);
     }
-
     fclose($output);
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
-
 $pdo = null;
 ?>

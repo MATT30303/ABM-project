@@ -2,7 +2,6 @@
 include("conection.php");
 
 try {
-
     $qrystr = "INSERT INTO personas (nombre, apellido, dni, producto, color, precio, estado)
     VALUES (:nombre, :apellido, :dni, :producto, :color, :precio, :estado)";
 

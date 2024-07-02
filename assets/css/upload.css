@@ -50,7 +50,7 @@ span{
 a{
     text-decoration: none;
 }
-input::file-selector-button, input[type=submit], a{
+input::file-selector-button, button, a{
     margin: 1rem 1rem;
     font-size: 1.5rem;
     color: var(--white);
@@ -62,7 +62,7 @@ input::file-selector-button, input[type=submit], a{
     cursor:pointer;
     transition: background-color ease-in .2s, box-shadow ease-in .2s;
 }
-input::file-selector-button:hover,input[type=submit]:hover, a:hover{
+input::file-selector-button:hover,button:hover, a:hover{
     background-color: var(--four);
     outline: thin solid var(--black);
     color: var(--black);

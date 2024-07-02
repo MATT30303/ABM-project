@@ -56,7 +56,7 @@ $pdo = null;
                 <input type="file" name="file" class="file" />
                 <div class="back-upload">
                     <a href="/landing.html">Home</a>
-                    <input type="submit" name="submit" value="Submit" />
+                    <button type="submit" name="submit">Subir</button>
                 </div>
             </form>
         </div>
